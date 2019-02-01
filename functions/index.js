@@ -50,6 +50,7 @@ exports.getRealData = functions.https.onRequest((req, res) => {
                 "email": user.data().email,
                 "firstName": user.data().firstName,
                 "lastName": user.data().lastName,
+                "userId": user.id,
                 "dates": []
             }
 
