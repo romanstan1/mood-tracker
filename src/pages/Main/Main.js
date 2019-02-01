@@ -7,6 +7,7 @@ import Nav from './Nav'
 import SwipeableViews from 'react-swipeable-views';
 import './Main.css'
 import { subscribeToUser, inputValueForToday } from 'firebase/modules';
+import Input from "./Input"
 
 class Main extends Component {
 
@@ -33,9 +34,7 @@ class Main extends Component {
         <div className='Main'>
           <Nav />
           <div className="inner">
-            <div className="input" > input
-               <div onClick={this.handleInput}>click me</div>
-            </div>
+            <div className="input" onClick={this.handleInput}><Input/></div>
             <div className="calender">Calender</div>
           </div>
         </div>
@@ -46,8 +45,7 @@ class Main extends Component {
         <div className="inner mobile">
           <SwipeableViews>
             <div className='input mobile'>
-              Input
-              <div onClick={this.handleInput}>click me</div>
+            <Input/>
             </div>
 
             <div className='calender mobile'>
