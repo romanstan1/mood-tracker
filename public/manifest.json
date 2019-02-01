@@ -1,0 +1,17 @@
+{
+  "short_name": "Roomipro",
+  "name": "Roomipro",
+  "icons": [
+    {
+      "src": "fav512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#2d2f3a",
+  "background_color": "#cecaca",
+  "description": "",
+  "gcm_sender_id": "103953800507"
+}

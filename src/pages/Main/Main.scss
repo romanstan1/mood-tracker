@@ -1,0 +1,46 @@
+@import "src/styles/_variables";
+
+div.Main {
+  height: 100%;
+  nav {
+    height: 50px;
+    background: $darkestGrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+  div.inner {
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    
+    div.calender,  div.input {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    &.mobile {
+      display: block;
+      >div {
+        height: calc(100% - 50px);
+        > div {
+          height: 100%;
+        }
+         >div {
+           height: 100%;
+           div.input {
+             width: 100%;
+           }
+           div.calender {
+             width: 100%;
+           }
+         }
+      }
+    }
+  }
+}

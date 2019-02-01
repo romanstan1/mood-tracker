@@ -1,0 +1,87 @@
+@import "src/styles/_variables";
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,500,700,700i,900');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  color: $navyBlue;
+  font-size: 15px;
+  background: $darkestGrey;
+  background: white;
+}
+
+input {
+  font-family: 'Roboto', sans-serif;
+}
+
+h2, h3, h4 {
+  font-weight: 400;
+}
+
+h1 {
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4, label {
+  font-size: 16px;
+}
+
+p {
+  font-size: 13px;
+}
+
+
+a {
+  text-decoration: none;
+  color: inherit;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+div#root {
+  height: 100%;
+  overflow: hidden;
+  >div {
+    // font-size: 0px;
+    height: 100%;
+    div.react-swipeable-view-container {
+      height: 100%;
+    }
+  }
+}
+
+button.CTAbutton {
+  display: inline-block;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 3px;
+  background: $brightBlue;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 13px;
+  transition: 0.3s ease;
+  font-family: 'Roboto', sans-serif;
+  &:hover {
+    background: $brightBlueHover;
+  }
+}
+
