@@ -29,8 +29,8 @@ class SignIn extends Component {
         //     // wait for response the click succcessFULLOGGEDIN
         //     // this.props.successfulLoggedIn(res.user)
         // })
-        .catch(err => {
-            console.log('err logged in', err)
+        .catch(error => {
+            console.log('err logged in', error)
             this.setState({error})
         })
     }
