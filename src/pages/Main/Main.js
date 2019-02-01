@@ -13,8 +13,6 @@ class Main extends Component {
   componentDidMount() {
     window.addEventListener('resize', this.resize)
     const { user } = this.props
-    console.log("user", user)
-
     subscribeToUser(user)
   }
 
