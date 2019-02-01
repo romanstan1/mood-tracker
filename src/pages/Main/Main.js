@@ -6,11 +6,16 @@ import {updateWidth} from 'store/actions'
 import Nav from './Nav'
 import SwipeableViews from 'react-swipeable-views';
 import './Main.css'
+import { subscribeToUser } from 'firebase/modules';
 
 class Main extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.resize)
+    const { user } = this.props
+    console.log("user", user)
+
+    subscribeToUser(user)
   }
 
   resize = (e) => {
@@ -35,11 +40,11 @@ class Main extends Component {
         <Nav />
         <div className="inner mobile">
           <SwipeableViews>
-            <div className='input'>
+            <div className='input mobile'>
               Input
             </div>
 
-            <div className='calender'>
+            <div className='calender mobile'>
               Calender
             </div>
           </SwipeableViews>
@@ -51,6 +56,7 @@ class Main extends Component {
 
 const mapState = state => ({
   width: state.data.width,
+  user: state.data.user
 })
 
 const mapDispatch = {

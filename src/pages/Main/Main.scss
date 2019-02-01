@@ -18,10 +18,13 @@ div.Main {
     
     div.calender,  div.input {
       width: 50%;
-      height: 100%;
+      height: calc(100% - 50px);
       display: flex;
       justify-content: center;
       align-items: center;
+      &.mobile {
+        height: 100%;
+      }
     }
     
     &.mobile {

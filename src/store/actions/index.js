@@ -1,9 +1,9 @@
 import { CONSTANTS } from '../constants'
 
-export const successfulLoggedIn = (email) => dispatch =>
+export const successfulLoggedIn = (user) => dispatch =>
   dispatch({
     type: CONSTANTS.SUCCESSFUL_LOGGED_IN,
-    payload: email
+    payload: user
   })
 
 export const updateWidth = (width) => dispatch =>

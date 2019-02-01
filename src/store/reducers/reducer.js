@@ -1,17 +1,5 @@
-import moment from 'moment'
 import { CONSTANTS } from '../constants'
-import {dates} from './modules'
-
-export const initialState = {
-  page: 0,
-  today: moment().startOf('day').valueOf(),
-  dates, 
-  width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-  isAuthenticated: false,
-  user: null,
-  // isAuthenticated: true,
-  // user: "roman.stankiewicz@perkbox.com"
-}
+import {initialState} from "./initialState"
 
 export default function databaseReducer(state = initialState, action) {
   switch (action.type) {

@@ -18,11 +18,43 @@ class SignIn extends Component {
         const { email, password } = this.state
 
         auth.signInWithEmailAndPassword(email, password)
-        .then(res => {
-            this.props.successfulLoggedIn(res.user.email)
+        .then(firebaseUser => {
+            this.uploadUserData(email, firebaseUser)
         })
+        // .then(res => {
+        //     console.log("success on sigin", res)
+        //     // lg
+        //     // if user doesnt exist, add new user to DB
+        //     // wait for response the click succcessFULLOGGEDIN
+        //     // this.props.successfulLoggedIn(res.user)
+        // })
         .catch(err => {
             console.log('err logged in', err)
+        })
+    }
+    
+
+
+    uploadUserData = (email, firebaseUser) => {
+        const names = email.split("@")[0].split(".")
+        const docRef = firestore.collection("users").doc(firebaseUser.user.uid)
+        docRef.get().then(doc => {
+            if (!doc.exists) {
+                docRef.set({
+                    email,
+                    firstName: names[0],
+                    lastName: names[1],
+                    dates: []
+                })
+                .catch(error => console.log('Error on user upload::', error))
+            }
+        })
+        .then(res => {
+            console.log("success on upload and logged in!", res)
+            this.props.successfulLoggedIn(firebaseUser.user)
+        })
+        .catch(error => {
+            console.log("Error getting document:", error);
         })
     }
 

@@ -1,4 +1,4 @@
-// import {auth, persistence, firestore, messaging, arrayUnion, arrayRemove} from './initialize'
+import {auth, firestore } from './initialize'
 // import {postNotificationApi} from 'modules/apis'
 
 // export const onAuthStateChanged = (logInSuccessful, notLoggedIn) => {
@@ -18,6 +18,52 @@
 //     }
 //   })
 // }
+
+// export const subscribeToLocation = ({ minDate, maxDate, addDateToLocation, updateLocationData, removeLoadingData, user, getDarkSky }) => {
+
+
+//     return firestore.collection("locations")
+//         .onSnapshot(querySnapshot => {
+//             let data = {}
+//             querySnapshot.forEach(doc => {
+
+//                 const locationData = doc.data()
+//                 data = { ...data, [doc.id]: { ...locationData, id: doc.id } }
+
+//                 firestore.collection("locations")
+//                     .doc(doc.id)
+//                     .collection("dates")
+//                     .where("id", ">=", minDate)
+//                     .where("id", "<=", maxDate)
+//                     .onSnapshot(querySnapshot => {
+//                         let dates = []
+
+//                         querySnapshot.forEach(docQuery => dates.push(docQuery.data()))
+//                         removeLoadingData(doc.id)
+//                         addDateToLocation(doc.id, dates)
+//                     })
+//             })
+//             updateLocationData(data)
+//         })
+        
+
+export const subscribeToUser = (user) => {
+    console.log("user", user)
+    firestore.collection('users')
+        .doc(user.uid)
+        .onSnapshot(userData => {
+            const thisUser = userData.data()
+            console.log("thisUser", thisUser)
+            // addUserData({
+
+            //     ...thisUser,
+            //     email: user.email,
+            //     refreshToken: user.refreshToken,
+            //     uid: user.uid
+            // })
+            // return thisUser
+    })
+}
 
 // export const handleBooking = (guest, addGuestBoolean, props) => {
 
