@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { EmailInput, PasswordInput, CTAButton, CardFooter, Title, Message } from './AuthModules'
 import { auth, firestore } from 'firebase/initialize'
+import headerLogo from "../../assets/headerLogo.png"
 
 import { successfulLoggedIn } from 'store/actions'
 import { connect } from 'react-redux'
@@ -57,6 +58,9 @@ class SignIn extends Component {
         const {email, password, error} = this.state
         return (
             <div className='Auth'>
+                <div className="logoContainer">
+                    <img src={headerLogo} alt="Vibes"/>
+                </div>
                 <Title /> 
                  <div className="card">
                     <EmailInput

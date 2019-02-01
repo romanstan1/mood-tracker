@@ -170,6 +170,13 @@ div.backgroundImage {
   }
 }
 
+div.logoContainer {
+  width: "100%";
+  text-align: "center";
+  padding: 20px;
+  background-color: $lightGrey
+}
+
 @media screen and (max-width: 720px) {
   div.Auth {
     width: calc(100% - 100px);
