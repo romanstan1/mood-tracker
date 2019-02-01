@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react'
-import { EmailInput, PasswordInput, CTAButton, CardFooter, Title } from './AuthModules'
-import { auth, persistence, firestore } from 'firebase/initialize'
+import React, { Component } from 'react'
+import { EmailInput, PasswordInput, CTAButton, CardFooter, Title, Message } from './AuthModules'
+import { auth, firestore } from 'firebase/initialize'
 
 import { successfulLoggedIn } from 'store/actions'
 import { connect } from 'react-redux'
@@ -9,10 +9,11 @@ import './SignIn.css'
 class SignIn extends Component {
     state = {
         email: '',
-        password: ''
+        password: '',
+        error: false
     }
 
-    handleChange = (e) => this.setState({ [e.target.dataset.type]: e.target.value })
+    handleChange = (e) => this.setState({ [e.target.dataset.type]: e.target.value, error: false })
 
     handleSignIn = () => {
         const { email, password } = this.state
@@ -21,15 +22,9 @@ class SignIn extends Component {
         .then(firebaseUser => {
             this.uploadUserData(email, firebaseUser)
         })
-        // .then(res => {
-        //     console.log("success on sigin", res)
-        //     // lg
-        //     // if user doesnt exist, add new user to DB
-        //     // wait for response the click succcessFULLOGGEDIN
-        //     // this.props.successfulLoggedIn(res.user)
-        // })
-        .catch(err => {
-            console.log('err logged in', err)
+        .catch(error => {
+            console.log('err logged in', error)
+            this.setState({error})
         })
     }
     
@@ -59,7 +54,7 @@ class SignIn extends Component {
     }
 
     render() {
-        const {email, password} = this.state
+        const {email, password, error} = this.state
         return (
             <div className='Auth'>
                 <Title /> 
@@ -80,6 +75,7 @@ class SignIn extends Component {
                         link='send-email'>
                         Forgot your password?
                     </CardFooter>
+                    <Message error={error}>{error}</Message>
                 </div> 
             </div>
         )
