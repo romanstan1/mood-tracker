@@ -19,6 +19,33 @@ class Input extends Component {
     }
   }
 
+  componentDidMount() {
+    // Use this to add mock data for a user
+    // const {user} = this.props
+    // inputValueForToday(1, user, 1546560000000)
+    // inputValueForToday(2, user, 1546819200000)
+    // inputValueForToday(1, user, 1546905600000)
+    // inputValueForToday(3, user, 1546992000000)
+    // inputValueForToday(2, user, 1547078400000)
+    // inputValueForToday(6, user, 1547164800000)
+    // inputValueForToday(4, user, 1547424000000)
+    // inputValueForToday(5, user, 1547510400000)
+    // inputValueForToday(2, user, 1547596800000)
+    
+    // inputValueForToday(6, user, 1547683200000)
+    // inputValueForToday(4, user, 1547769600000)
+    // inputValueForToday(3, user, 1548028800000)
+    // inputValueForToday(4, user, 1548115200000)
+    // inputValueForToday(6, user, 1548201600000)
+
+    // inputValueForToday(4, user, 1548288000000)
+    // inputValueForToday(6, user, 1548374400000)
+    // inputValueForToday(5, user, 1548633600000)
+    // inputValueForToday(6, user, 1548720000000)
+    // inputValueForToday(3, user, 1548806400000)
+    // inputValueForToday(5, user, 1548892800000)
+  }
+
   returnSelectedEmoji = () => {
     switch (this.state.answer) {
       case 1:

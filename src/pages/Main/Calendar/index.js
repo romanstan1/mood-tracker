@@ -1,26 +1,16 @@
 import React, { Component, Fragment } from "react";
-import ReactNipple from 'react-nipple';
 import { Text } from "../../../components";
-import './Input.css'
 import { inputValueForToday } from 'firebase/modules';
 import {connect} from 'react-redux'
+import "./Calendar.css"
 
 class Input extends Component {
   state = {
     answer: undefined
   }
 
-  handleEvent = (_evt, data) => {
-    if (data && data.angle && data.angle.degree) {
-      const degree = data.angle.degree
-      const answer = Math.round(degree / 60)
-      this.setState({answer})
-      this.handleInput(answer)
-    }
-  }
-
-  returnSelectedEmoji = () => {
-    switch (this.state.answer) {
+  returnSelectedEmoji = (answer) => {
+    switch (answer) {
       case 1:
         return <Text>😡</Text>
       case 2:
@@ -44,40 +34,32 @@ class Input extends Component {
   }
 
   render() {
+    const {myUserData} = this.props
+    const dates = myUserData && myUserData.dates && myUserData.dates.length > 0
+    ? myUserData.dates
+    : []
+
     return (
-      <div className="Main">
-        <div style={{display: "flex", height: "60px", marginTop: "20px"}}>
-          <div style={{width: "100%", alignItems: "center", justifyContent: "center"}}>
-            <Text>You are feeling: </Text>
-            {this.returnSelectedEmoji()}
-          </div>
-        </div>
-        <ReactNipple
-          options={{ mode: 'static', position: { top: '50%', left: '50%' } }}
-          style={{
-            color: 'blue',
-            width: 200,
-            height: 200,
-            position: 'relative'
-          }}
-          onStart={this.handleEvent}
-          onEnd={this.handleEvent}
-          onMove={this.handleEvent}
-          onDir={this.handleEvent}
-          onPlain={this.handleEvent}
-          onShown={this.handleEvent}
-          onHidden={this.handleEvent}
-          onPressure={this.handleEvent}
-        />
+      <div className="Calendar">
+        <span style={{marginBottom: 10}}>How you've been feeling the last few weeks..</span>
+        {
+          dates.map((date, i) => (
+            <div key={i}>
+              <hr/>
+              <span>{date.date}</span>
+              <Text>{this.returnSelectedEmoji(date.answer)}</Text>
+            </div>
+          ))
+        }
       </div>
     )
   }
 }
 
 const mapState = state => ({
-  width: state.data.width,
   user: state.data.user,
-  today: state.data.today
+  today: state.data.today,
+  myUserData: state.data.myUserData
 })
 
 export default connect(mapState)(Input)
