@@ -96,3 +96,92 @@ exports.getRealData = functions.https.onRequest((req, res) => {
         return "";
     })
 });
+
+
+
+
+
+
+
+exports.getRealData2 = functions.https.onRequest((req, res) => {
+    
+    var users = [];
+    var db = admin.firestore();
+
+
+
+
+    function addDateToUser(dateElement, userElement) {
+        users = users.map(user => {
+            if(user.email === userElement.email) {
+                return {
+                    ...user,
+                    dates: [].concat(user.dates, dateElement)
+                }
+            }
+            return user
+        })
+    }
+
+
+
+    db.collection("users").get().then(snapshot => {
+        snapshot.forEach(user => {
+            var userElement = {
+                "email": user.data().email,
+                "firstName": user.data().firstName,
+                "lastName": user.data().lastName,
+                "uid": user.id,
+                "dates": []
+            }
+
+            users = users.concat(userElement);
+            
+
+
+            db.collection("users").doc(user.id).collection('dates').get().then(snapInner => {
+
+                snapInner.forEach(date => {
+                    var dateElement = {
+                        "answer": date.data().answer,
+                        "date": date.data().date,
+                        "id": date.data().id
+                    }
+
+                    addDateToUser(dateElement, userElement)
+                })
+
+            })
+
+
+
+        })
+    })
+    .then(() => {
+        setTimeout(() => {
+
+            const usersObject = {};
+            for (var i = 0; i < users.length; i++) {
+                usersObject[users[i].uid] = users[i];
+            }
+
+            res.send({
+                data: {
+                    users: usersObject
+                }
+            }) 
+        }, 3000);
+    })
+    .then(response => {
+
+        console.log('users in THENN: ', users) 
+        // res.send(users) 
+        return "";
+    })
+    .catch(reason => {
+        console.log('error caught, reason: ', reason)
+        console.log('error caught, users: ', users)
+        res.send(reason)
+        return "";
+    })
+});
