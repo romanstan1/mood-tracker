@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { EmailInput, PasswordInput, CTAButton, CardFooter, Title, Message } from './AuthModules'
-import { auth } from 'firebase/initialize'
+import { auth, firestore } from 'firebase/initialize'
 
 import { successfulLoggedIn } from 'store/actions'
 import { connect } from 'react-redux'
@@ -22,13 +22,6 @@ class SignIn extends Component {
         .then(firebaseUser => {
             this.uploadUserData(email, firebaseUser)
         })
-        // .then(res => {
-        //     console.log("success on sigin", res)
-        //     // lg
-        //     // if user doesnt exist, add new user to DB
-        //     // wait for response the click succcessFULLOGGEDIN
-        //     // this.props.successfulLoggedIn(res.user)
-        // })
         .catch(error => {
             console.log('err logged in', error)
             this.setState({error})
