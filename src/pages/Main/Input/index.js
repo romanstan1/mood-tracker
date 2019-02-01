@@ -15,6 +15,7 @@ class Input extends Component {
       const degree = data.angle.degree
       const answer = Math.round(degree / 60)
       this.setState({answer})
+      this.handleInput(answer)
     }
   }
 
@@ -37,9 +38,9 @@ class Input extends Component {
     }
   }
 
-  handleInput = () => {
+  handleInput = (answer) => {
     const {user, today} =  this.props
-    inputValueForToday(4, user, today)
+    inputValueForToday(answer, user, today)
   }
 
   render() {
