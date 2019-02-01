@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react'
-import { EmailInput, PasswordInput, CTAButton, CardFooter, Title } from './AuthModules'
-import { auth, persistence, firestore } from 'firebase/initialize'
+import React, { Component } from 'react'
+import { EmailInput, PasswordInput, CTAButton, CardFooter, Title, Message } from './AuthModules'
+import { auth } from 'firebase/initialize'
 
 import { successfulLoggedIn } from 'store/actions'
 import { connect } from 'react-redux'
@@ -9,10 +9,11 @@ import './SignIn.css'
 class SignIn extends Component {
     state = {
         email: '',
-        password: ''
+        password: '',
+        error: false
     }
 
-    handleChange = (e) => this.setState({ [e.target.dataset.type]: e.target.value })
+    handleChange = (e) => this.setState({ [e.target.dataset.type]: e.target.value, error: false })
 
     handleSignIn = () => {
         const { email, password } = this.state
@@ -21,13 +22,14 @@ class SignIn extends Component {
         .then(res => {
             this.props.successfulLoggedIn(res.user.email)
         })
-        .catch(err => {
-            console.log('err logged in', err)
+        .catch(error => {
+            this.setState({error})
+            console.log('error logged in', error)
         })
     }
 
     render() {
-        const {email, password} = this.state
+        const {email, password, error} = this.state
         return (
             <div className='Auth'>
                 <Title /> 
@@ -48,6 +50,7 @@ class SignIn extends Component {
                         link='send-email'>
                         Forgot your password?
                     </CardFooter>
+                    <Message error={error}>{error}</Message>
                 </div> 
             </div>
         )
