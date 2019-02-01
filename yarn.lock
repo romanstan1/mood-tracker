@@ -6413,6 +6413,11 @@ nice-try@^1.0.4:
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
+nipplejs@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/nipplejs/-/nipplejs-0.8.0.tgz#20709f6f6e007bb3f9aaafb9bc0b96343fecc1a1"
+  integrity sha512-sqz9c5vFzq4xoB4rM+EMLKwgso6cVybNhL1dsUC6s3QmlkgBfuZ59ib9AdwHacknH0b3bWfyC0qxb9oeaEl8zQ==
+
 nise@^1.4.5:
   version "1.4.8"
   resolved "https://registry.yarnpkg.com/nise/-/nise-1.4.8.tgz#ce91c31e86cf9b2c4cac49d7fcd7f56779bfd6b0"

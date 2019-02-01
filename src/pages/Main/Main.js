@@ -6,7 +6,7 @@ import {updateWidth} from 'store/actions'
 import Nav from './Nav'
 import SwipeableViews from 'react-swipeable-views';
 import './Main.css'
-import { subscribeToUser } from 'firebase/modules';
+import { subscribeToUser, inputValueForToday } from 'firebase/modules';
 
 class Main extends Component {
 
@@ -16,6 +16,10 @@ class Main extends Component {
     console.log("user", user)
 
     subscribeToUser(user)
+  }
+
+  handleInput = () => {
+    // inputValueForToday(4, user, today)
   }
 
   resize = (e) => {
@@ -30,7 +34,7 @@ class Main extends Component {
         <div className='Main'>
           <Nav />
           <div className="inner">
-            <div className="input">Input</div>
+            <div className="input" onClick={this.handleInput}>Input</div>
             <div className="calender">Calender</div>
           </div>
         </div>
@@ -56,7 +60,8 @@ class Main extends Component {
 
 const mapState = state => ({
   width: state.data.width,
-  user: state.data.user
+  user: state.data.user,
+  today: state.data.user
 })
 
 const mapDispatch = {
