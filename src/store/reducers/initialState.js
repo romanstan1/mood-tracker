@@ -6,13 +6,17 @@ export const initialState = {
     today: moment().startOf('day').valueOf(),
     dates,
     width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-    // @todo add this back
-    // isAuthenticated: false,
-    // user: null,
-    isAuthenticated: true,
-    user: {
-        email: "roman.stankiewicz@perkbox.com",
-        uid: "DF4Ean8HRjckmD0vmbYaRNqBxPm1"
-    }
-
+    isAuthenticated: false,
+    user: null,
+    // isAuthenticated: true,
+    // user: {
+    //     email: "roman.stankiewicz@perkbox.com",
+    //     uid: "DF4Ean8HRjckmD0vmbYaRNqBxPm1"
+    // },
+    // myUserData: {
+    //     email: "",
+    //     firstName: "",
+    //     secondName: "",
+    //     dates: []
+    // }
 }

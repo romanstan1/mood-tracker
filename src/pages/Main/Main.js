@@ -14,13 +14,12 @@ class Main extends Component {
   componentDidMount() {
     window.addEventListener('resize', this.resize)
     const { user } = this.props
-    console.log("user", user)
-
     subscribeToUser(user)
   }
 
   handleInput = () => {
-    // inputValueForToday(4, user, today)
+    const {user, today} =  this.props
+    inputValueForToday(4, user, today)
   }
 
   resize = (e) => {
@@ -62,7 +61,7 @@ class Main extends Component {
 const mapState = state => ({
   width: state.data.width,
   user: state.data.user,
-  today: state.data.user
+  today: state.data.today
 })
 
 const mapDispatch = {

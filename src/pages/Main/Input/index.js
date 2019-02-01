@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import ReactNipple from 'react-nipple';
 import { Text } from "../../../components";
 import './Input.css'
+import { inputValueForToday } from 'firebase/modules';
+import {connect} from 'react-redux'
 
 class Input extends Component {
   state = {
@@ -14,10 +16,6 @@ class Input extends Component {
       const answer = Math.round(degree / 60)
       this.setState({answer})
     }
-  }
-
-  calculateAnswerFromDegree = () => {
-
   }
 
   returnSelectedEmoji = () => {
@@ -37,6 +35,11 @@ class Input extends Component {
       default:
         return <Text>❓</Text>
     }
+  }
+
+  handleInput = () => {
+    const {user, today} =  this.props
+    inputValueForToday(4, user, today)
   }
 
   render() {
@@ -70,4 +73,10 @@ class Input extends Component {
   }
 }
 
-export default Input
+const mapState = state => ({
+  width: state.data.width,
+  user: state.data.user,
+  today: state.data.today
+})
+
+export default connect(mapState)(Input)
