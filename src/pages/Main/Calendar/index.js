@@ -43,7 +43,7 @@ class Input extends Component {
       <div className="Calendar">
         <span style={{marginBottom: 10}}>How you've been feeling the last few weeks..</span>
         {
-          dates.map((date, i) => (
+          dates.slice(0).reverse().map((date, i) => (
             <div key={i}>
               <hr/>
               <span>{date.date}</span>
