@@ -19,7 +19,8 @@ class Main extends Component {
   }
 
   handleInput = () => {
-    // inputValueForToday(4, user, today)
+    const {user, today} =  this.props
+    inputValueForToday(4, user, today)
   }
 
   resize = (e) => {
@@ -34,7 +35,9 @@ class Main extends Component {
         <div className='Main'>
           <Nav />
           <div className="inner">
-            <div className="input" onClick={this.handleInput}>Input</div>
+            <div className="input" > input
+               <div onClick={this.handleInput}>click me</div>
+            </div>
             <div className="calender">Calender</div>
           </div>
         </div>
@@ -46,6 +49,7 @@ class Main extends Component {
           <SwipeableViews>
             <div className='input mobile'>
               Input
+              <div onClick={this.handleInput}>click me</div>
             </div>
 
             <div className='calender mobile'>
@@ -61,7 +65,7 @@ class Main extends Component {
 const mapState = state => ({
   width: state.data.width,
   user: state.data.user,
-  today: state.data.user
+  today: state.data.today
 })
 
 const mapDispatch = {

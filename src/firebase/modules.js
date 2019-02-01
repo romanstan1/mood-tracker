@@ -65,11 +65,17 @@ export const subscribeToUser = (user) => {
     })
 }
 
-// export const inputValueForToday = (4, user, today) => {
+export const inputValueForToday = (val, user, today) => {
+    console.log("val, user, today", val, user, today)
+    const userRef = firestore
+        .collection("users")
+        .doc(user.uid)
+        
+    const dateRef = userRef
+        .collection('dates')
+        .doc(`${today}`)
 
-//     // const usersRef = firestore.collection("users")
-
-// }
+}
 
 
 
@@ -126,6 +132,33 @@ export const subscribeToUser = (user) => {
 //             })
 //         })
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // export const handleBooking = (guest, addGuestBoolean, props) => {
 
