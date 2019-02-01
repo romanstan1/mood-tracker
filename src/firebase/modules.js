@@ -1,4 +1,10 @@
+import moment from 'moment'
+
 import {auth, firestore } from './initialize'
+import { addUserAndDate } from 'store/actions'
+
+import  store from '../store'
+
 // import {postNotificationApi} from 'modules/apis'
 
 // export const onAuthStateChanged = (logInSuccessful, notLoggedIn) => {
@@ -48,12 +54,47 @@ import {auth, firestore } from './initialize'
         
 
 export const subscribeToUser = (user) => {
-    console.log("user", user)
+    console.log("user", user, store)
     firestore.collection('users')
         .doc(user.uid)
         .onSnapshot(userData => {
-            const thisUser = userData.data()
+            let thisUser = userData.data()
             console.log("thisUser", thisUser)
+
+            firestore.collection('users')
+                .doc(user.uid)
+                .collection('dates')
+                .onSnapshot(querySnapshot => {
+                    let dates = []
+                    querySnapshot.forEach(docQuery => { 
+                        console.log("thisUser, docQuery!!", thisUser, docQuery.data())
+                        dates.push(docQuery.data())
+                        store.dispatch(addUserAndDate(thisUser, dates))
+                    })
+                })
+
+
+
+            // let dates = []
+            // userData.forEach(docQuery => dates.push(docQuery.data()))
+
+            // console.log()
+
+            // thisUser.collection("dates")
+            // data = { ...data, [doc.id]: { ...locationData, id: doc.id } }
+
+            // firestore.collection("users")
+            //     .doc(user.uid)
+            //     .collection("dates")
+            //     .where("id", ">=", minDate)
+            //     .where("id", "<=", maxDate)
+            //     .onSnapshot(querySnapshot => {
+            //         let dates = []
+
+            //         querySnapshot.forEach(docQuery => dates.push(docQuery.data()))
+            //         removeLoadingData(doc.id)
+            //     })
+
             // addUserData({
 
             //     ...thisUser,
@@ -65,16 +106,37 @@ export const subscribeToUser = (user) => {
     })
 }
 
-export const inputValueForToday = (val, user, today) => {
-    console.log("val, user, today", val, user, today)
+export const inputValueForToday = (val, user, todayId) => {
     const userRef = firestore
-        .collection("users")
-        .doc(user.uid)
-        
+    .collection("users")
+    .doc(user.uid)
+    
     const dateRef = userRef
-        .collection('dates')
-        .doc(`${today}`)
+    .collection('dates')
+    .doc(`${todayId}`)
 
+    dateRef.get()
+    .then(doc => {
+        const date = moment(todayId).format('dddd D MMMM YYYY')
+        if (doc.exists)  {
+            console.log('doc exists', doc)
+            // need to update instead!!!
+            dateRef.update({
+                "id": todayId,
+                "date": date,
+                "answer": val
+            })
+        } else {
+            dateRef.set({
+                "id": todayId,
+                "date": date,
+                "answer": val
+            })
+        }
+    })
+    
+    // console.log("val, user, today", val, user, todayId)
+    // console.log("dateRef: ", dateRef)
 }
 
 
@@ -87,15 +149,15 @@ export const inputValueForToday = (val, user, today) => {
 
 //     placeBooking(selectedLocation.id, selectedDate.id)
 
-//     const dateRef = locationRef
-//         .doc(selectedLocation.id)
-//         .collection('dates')
-//         .doc(`${selectedDate.id}`)
+    // const dateRef = locationRef
+    //     .doc(selectedLocation.id)
+    //     .collection('dates')
+    //     .doc(`${selectedDate.id}`)
 
-//     dateRef
-//         .get()
-//         .then(doc => {
-//             if (guest && addGuestBoolean) dateRef.update({
+    // dateRef
+    //     .get()
+    //     .then(doc => {
+    //         if (guest && addGuestBoolean) dateRef.update({
 //                 "id": selectedDate.id,
 //                 "date": selectedDate.date,
 //                 "people": arrayUnion({ ...bookingUser, guest: Math.floor(Date.now() / 1000) }),

@@ -11,3 +11,9 @@ export const updateWidth = (width) => dispatch =>
     type: CONSTANTS.UPDATE_WIDTH,
     payload: width
   })
+
+export const addUserAndDate = (user, dates) => dispatch =>
+  dispatch({
+    type: CONSTANTS.ADD_USER_AND_DATA,
+    payload: { user, dates}
+  })

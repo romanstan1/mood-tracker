@@ -12,6 +12,11 @@ export const initialState = {
     user: {
         email: "roman.stankiewicz@perkbox.com",
         uid: "DF4Ean8HRjckmD0vmbYaRNqBxPm1"
+    },
+    myUserData: {
+        email: "",
+        firstName: "",
+        secondName: "",
+        dates: []
     }
-
 }
